@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+</head>
+
+<body class="container-main">
+    <div class="container mt-5">
+        <h2 class="text-center">{{ category.name }}</h2>
+
+        <a href="{{ url_for('posts', category_id=category.id) }}" class="btn btn-success mb-4"
+            style="background-color: #f02b91; border-color: #f02b91;">Criar Novo Post</a>
+        <p> Clique no botão acima para criar um novo post nesta categoria.</p>    
+
+        {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ url_for('post_details', post_id=post.id) }}" style="color: #f02b91;" class="text-decoration-none">{{ post.title }}</a>
+                </h5>
+                <p class="card-text">{{ post.content }}</p>
+                <p class="text-muted">Criado por: <strong>{{ post.created_by_username }}</strong></p>
+                <p class="text-muted">Comentários: <strong>{{ post.comments_amount }}</strong></p>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">Ainda não há posts nesta categoria.</p>
+        {% endfor %}
+
+        <a href="{{ url_for('home') }}" style="background-color: #f02b91; border-color: #f02b91;" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+</body>
+
+</html>

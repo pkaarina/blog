@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Post - {{ category.name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Criar Novo Post em {{ category.name }}</h2>
+        
+        <form method="POST" action="{{ url_for('create_post', category_id=category.id) }}" class="mt-4">
+            <div class="mb-3">
+                <label for="title" class="form-label">Título do Post</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Conteúdo do Post</label>
+                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #f02b91; border-color: #f02b91;">Criar Post</button>
+        </form>
+
+        <a href="{{ url_for('category_posts', category_id=category.id) }}" class="btn btn-secondary mt-3 w-100" style="background-color: black; border-color: black; color: white;">Voltar à Categoria</a>
+    </div>
+</body>
+</html>
